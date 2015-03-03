@@ -1,9 +1,10 @@
-api = 2
+core = "7.x"
+api = "2"
 includes[] = drupal-org-core.make
-includes[] = drupal-org.make
 
 ; Profiles
-; projects[totem][download][type] = git
-; projects[totem][download][url] = http://git.drupal.org/project/totem.git
-; projects[totem][download][branch] = 7.x-1.x
-; projects[totem][type] = profile
+projects[zebradog][download][type] = git
+projects[zebradog][download][url] = http://git.drupal.org/sandbox/natemow/2445397.git
+projects[zebradog][download][branch] = 7.x-1.x
+projects[zebradog][type] = profile
+
