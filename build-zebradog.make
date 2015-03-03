@@ -1,6 +1,6 @@
 core = "7.x"
 api = "2"
-includes[] = drupal-org-core.make
+includes[] = http://cgit.drupalcode.org/sandbox-natemow-2445397/plain/drupal-org-core.make
 
 ; Profiles
 projects[zebradog][download][type] = git
