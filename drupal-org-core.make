@@ -1,6 +1,7 @@
 core = "7.x"
 api = "2"
-projects[drupal][type] = core
-projects[drupal][download][type] = git
-projects[drupal][download][url] = "https://github.com/pantheon-systems/drops-7.git"
+
+projects[drops-7][type] = "core"
+projects[drops-7][download][type] = "get"
+projects[drops-7][download][url] = "https://github.com/pantheon-systems/drops-7/archive/master.zip"
 
