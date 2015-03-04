@@ -2,6 +2,30 @@ name = Zebradog
 description = Zebradog install profile.
 core = 7.x
 
+; Core
+dependencies[] = block
+dependencies[] = color
+dependencies[] = dblog
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = update
+dependencies[] = user
+
+; Contribs
+dependencies[] = admin_menu
 dependencies[] = admin_views
 dependencies[] = ctools
 dependencies[] = date
@@ -24,7 +48,9 @@ dependencies[] = geolocation_googlemaps
 dependencies[] = auto_nodetitle
 dependencies[] = entity
 dependencies[] = entity_token
+dependencies[] = jquery_update
 dependencies[] = libraries
+dependencies[] = module_filter
 dependencies[] = pathauto
 dependencies[] = token
 dependencies[] = transliteration
