@@ -1,0 +1,10 @@
+/**
+ * This file should get overwritten if Method 1 is used. If Method 2 is chosen,
+ * remove this comment and start adding your styles to this file.
+ */
+.embed .vertical-tabs {
+  display:none;
+}
+#edit-field-categories-tid {
+  width:230px;
+}
