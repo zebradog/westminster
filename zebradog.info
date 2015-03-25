@@ -71,3 +71,6 @@ dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_json
 dependencies[] = views_ui
+
+; Customs
+dependencies[] = zebradog_schedule

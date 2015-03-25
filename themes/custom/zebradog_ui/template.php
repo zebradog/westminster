@@ -1,15 +1,11 @@
 <?php
-
-// Provide < PHP 5.3 support for the __DIR__ constant.
-if (!defined('__DIR__')) {
-  define('__DIR__', dirname(__FILE__));
-}
-require_once __DIR__ . '/../bootstrap/includes/bootstrap.inc';
-require_once __DIR__ . '/../bootstrap/includes/theme.inc';
-require_once __DIR__ . '/../bootstrap/includes/pager.inc';
-require_once __DIR__ . '/../bootstrap/includes/form.inc';
-require_once __DIR__ . '/../bootstrap/includes/admin.inc';
-require_once __DIR__ . '/../bootstrap/includes/menu.inc';
+$bootstrap_dir = drupal_get_path('theme', 'bootstrap');
+require_once $bootstrap_dir . '/includes/bootstrap.inc';
+require_once $bootstrap_dir . '/includes/theme.inc';
+require_once $bootstrap_dir . '/includes/pager.inc';
+require_once $bootstrap_dir . '/includes/form.inc';
+require_once $bootstrap_dir . '/includes/admin.inc';
+require_once $bootstrap_dir . '/includes/menu.inc';
 
 // Load module specific files in the modules directory.
 $includes = file_scan_directory(__DIR__ . '/../includes/modules', '/\.inc$/');
