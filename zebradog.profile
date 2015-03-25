@@ -9,7 +9,7 @@ function zebradog_install_tasks() {
     'display_name' => t('Enabling bootstrap theme'),
     'display' => FALSE,
     'type' => 'normal',
-    'run' => INSTALL_TASK_IF_REACHED,
+    'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_bootstrap',
   );
   return $tasks;
