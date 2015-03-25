@@ -1,0 +1,198 @@
+<?php
+/**
+ * @file
+ * Code for the zebradog_schedule feature.
+ */
+
+include_once 'zebradog_schedule.features.inc';
+
+/**
+ * @file
+ * Zebradog Schedule functions.
+ */
+
+function zebradog_schedule_menu() {
+  $items = array();
+
+  $items['admin/schedule'] = array(
+    'title' => 'Schedule',
+    'description' => 'Schedule',
+    'page callback' => 'zebradog_schedule_page_schedule',
+    'page arguments' => array('highwire_settings'),
+    'access arguments' => array('administer own schedule'),
+    'menu_name' => 'management',
+  );
+  return $items;
+}
+/**
+ * Implements hook_permission().
+ */
+function zebradog_schedule_permission() {
+  return array(
+    'administer own schedule' => array(
+      'title' => t('Administer Own Schedule'),
+      'description' => t('Administer own schedule.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_action_info().
+ */
+function zebradog_schedule_page_schedule() {
+  // Create some data
+  $data = array
+  (
+    '#markup' => t('&nbsp;'),
+    '#prefix' => '',
+    '#suffix' => '',
+  );
+  // Create a $page render array that will be returned
+  // from your callback. Attach the CSS using the #attached
+  // element of this array
+  $page = array(
+    'zebradog_schedule_page_schedule' => array(
+      // Note - we will register theme_my_page in the next step
+      '#theme' => 'zebradog_ui',
+      '#contents' => $data,
+    ),
+    '#attached' => array(
+      'css' => array(
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.resizable.min.css',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/themes/zebradog_ui/css/style.css',
+        ),
+        array(
+          'type' => 'file',
+          'data' => drupal_get_path('module', 'zebradog_schedule') . '/css/fullcalendar.css',
+        ),
+        array(
+          'type' => 'file',
+          'data' => drupal_get_path('module', 'zebradog_schedule') . '/css/schedule.css',
+        ),
+      ),
+      'js' => array(
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.mouse.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.draggable.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.droppable.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.resizable.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect-highlight.min.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => 'sites/all/libraries/fullcalendar/fullcalendar.js',
+        ),
+        array(
+          'type' => 'file',
+          'data' => drupal_get_path('module', 'zebradog_schedule') . '/js/schedule.js',
+        ),
+      )
+    ),
+  );
+
+  return $page;
+}
+
+/**
+ * Implements hook_theme()
+ */
+/**
+ * Implements hook_action_info().
+ */
+function zebradog_schedule_theme() {
+  return array(
+    'zebradog_ui' => array(
+      'render element' => 'elements',
+      'template' => 'templates/calendar-page',
+    ),
+  );
+}
+
+/**
+ * Implements hook_translated_menu_link_alter().
+ */
+function zebradog_schedule_translated_menu_link_alter(&$item, $map) {
+  global $user;
+  if (in_array('content editor', $user->roles)) {
+    if ($item['menu_name'] == 'management') {
+      if ($item['link_title'] == 'Administration') {
+        $item['access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'scheduled_content_node_form' :
+      // Prepopulate form based on activity in the Schedule page
+      $params = drupal_get_query_parameters();
+      if (isset($params))
+      {
+        if (isset($params['date']) && is_array($params['date']))
+        {
+          if (isset($params['date']['value']['date']) && isset($params['date']['value']['time']))
+          {
+            $date1 = $params['date']['value']['date'];
+            $time1 = $params['date']['value']['time'];
+            $formatted = date('c',strtotime($date1.' '.$time1));
+            $form['field_date']['und'][0]['#default_value']['value'] = $formatted;
+          }
+          if (isset($params['date']['value2']['date']) && isset($params['date']['value2']['time']))
+          {
+            $date2 = $params['date']['value2']['date'];
+            $time2 = $params['date']['value2']['time'];
+            $formatted = date('c',strtotime($date2.' '.$time2));
+            $form['field_date']['und'][0]['#default_value']['value2'] = $formatted;
+          }
+        }
+        if (isset($params['field_scenario']))
+        {
+          $form['field_scenario']['und'][0]['field_default_scenario']['und']['#default_value'] = $params['field_scenario'];
+        }
+      }
+      break;
+  }
+}
