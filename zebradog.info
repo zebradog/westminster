@@ -37,7 +37,6 @@ dependencies[] = date_views
 ; dependencies[] = execute_events
 dependencies[] = color_field
 dependencies[] = conditional_fields
-dependencies[] = dblog
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = field_collection
