@@ -7,14 +7,14 @@ function zebradog_install_tasks() {
   $tasks = array();
   $tasks['enable_modules'] = array(
     'display_name' => t('Enabling modules'),
-    'display' => FALSE,
+    'display' => TRUE,
     'type' => 'normal',
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_modules',
   );
   $tasks['enable_bootstrap'] = array(
     'display_name' => t('Enabling bootstrap theme'),
-    'display' => FALSE,
+    'display' => TRUE,
     'type' => 'normal',
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_bootstrap',
