@@ -9,7 +9,7 @@
  */
 function zebradog_schedule_menu_default_menu_links() {
   $menu_links = array();
-/*
+
   // Exported menu link: management_:admin/config/content/formats/%
   $menu_links['management_:admin/config/content/formats/%'] = array(
     'menu_name' => 'management',
@@ -1797,7 +1797,7 @@ function zebradog_schedule_menu_default_menu_links() {
     'weight' => 5,
     'customized' => 0,
     'parent_identifier' => 'management_configuration:admin/config',
-  );*/
+  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Account settings');

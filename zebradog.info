@@ -27,6 +27,7 @@ dependencies[] = user
 ; Contribs
 dependencies[] = admin_menu
 dependencies[] = admin_views
+dependencies[] = block_class
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = date_api

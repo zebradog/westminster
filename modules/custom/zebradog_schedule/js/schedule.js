@@ -149,9 +149,9 @@ jQuery(document).ready(function() {
         show: true
       })
       .css({
-        'height': '80%',
+        /*'height': '80%',
         'width': '80%',
-        'margin-left': function () {return -($(this).width() / 2);}
+        'margin-left': function () {return -($(this).width() / 2);}*/
       }).find('iframe').css({
         'height': function () { return $(this).parents('.modal').height()-HEADER_HEIGHT; }
       });

@@ -1,0 +1,43 @@
+.not-logged-in .nav.menu{
+  display:none;
+}
+.embed .vertical-tabs {
+  display:none;
+}
+#edit-field-categories-tid {
+  width:230px;
+}
+.management-menu {
+  float:left;
+}
+.user-menu {
+  float:right;
+}
+.management-menu li, .user-menu li {
+  display:inline-block;
+  float:left;
+}
+#site-name {
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+  position: relative;
+  left: -12px;
+  top: 9px;
+  padding-right: 10px;
+  border-right: 1px solid;
+  font-size:18px;
+}
+div.region-navigation {
+  display:inline;
+}
+.nav>li>a {
+  height:48px;
+}
+#edit-field-categories-tid-wrapper {
+  width:280px;
+}
+.form-item-author {
+  width:180px;
+}

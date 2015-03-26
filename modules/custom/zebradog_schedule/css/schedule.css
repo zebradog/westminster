@@ -109,3 +109,6 @@
 .end-time {
 
 }
+body.embed #admin-menu-wrapper, body.embed #admin-toolbar, body.embed div#admin-menu-wrapper, body.embed #admin-menu {
+  display:none;
+}
