@@ -15,8 +15,7 @@ function zebradog_install_tasks() {
   return $tasks;
 }
 function enable_bootstrap() {
-  theme_enable('bootstrap');
-  theme_enable('zd_ui');
+  theme_enable(array('bootstrap','zd_ui'));
   variable_set('theme_default','zd_ui');
   variable_set('admin_theme','seven');
   variable_set('node_admin_theme','zd_ui');
