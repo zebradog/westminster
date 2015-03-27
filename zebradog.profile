@@ -163,15 +163,15 @@ function enable_taxonomy_terms(){
 
 // Displays taxonomy terms
   $displays = array(
-    'Lobby',
-    'Tradeshow',
+    -32 => 'Lobby',
+    -31 => 'Tradeshow',
   );
   _zebradog_terms_load_terms($displays, 'displays');
 // Scenarios taxonomy terms
   $scenarios = array(
-    'Interactive Content',
-    'Slideshow Scenario',
-    'Video Scenario',
+    -32 => 'Interactive Content',
+    -31 => 'Slideshow Scenario',
+    -30 => 'Video Scenario',
   );
   _zebradog_terms_load_terms($scenarios, 'scenario_type');
 }
@@ -181,42 +181,15 @@ function enable_taxonomy_terms(){
  */
 function _zebradog_terms_load_terms($terms, $vocab_name, $parent = NULL){
   $vocab = taxonomy_vocabulary_machine_name_load($vocab_name);
-  if ($vocab == false) {
-    drupal_set_message('Error while attempting to install vocabulary ' . $vocab_name, 'error');
-  } else {
-    $count = -32;
-    foreach($terms as $term){
-      $parent_tid = 0;
-      if (!is_array($term)) {
-        $tid = _zebradog_save_term($term,$vocab->vid,$parent_tid,$count);
-      } else {
-        foreach ($term as $subterm)
-        {
-          $subparent_tid = 0;
-          if (!is_array($subterm)) {
-            $tid = _zebradog_save_term($subterm,$vocab->vid,$subparent_tid,$count);
-            if ($subparent_tid == 0) $subparent_tid = $tid;
-          } else {
-            $subparent_tid = 0;
-            foreach ($subterm as $subsub)
-            {
-              $tid = _zebradog_save_term($subterm,$vocab->vid,$subparent_tid,$count);
-              if ($subparent_tid == 0) $subparent_tid = $tid;
-            }
-          }
-        }
-      }
-      $count++;
-    }
+  $parent_term = taxonomy_get_term_by_name($parent,$vocab_name);
+  $parent_tid = $parent_term->tid;
+  foreach ($terms as $weight=>$term) {
+    $data         = new stdClass();
+    $data->name   = $term;
+    $data->vid    = $vocab->vid;
+    $data->weight = $weight;
+    $data->parent = $parent_tid;
+    taxonomy_term_save($data);
   }
-}
-function _zebradog_save_term($term,$vid,$parent_tid,$weight) {
-  $data = new stdClass();
-  $data->name = $term;
-  $data->vid = $vid;
-  $data->weight = $weight;
-  $data->parent = $parent_tid;
-  taxonomy_term_save($data);
-  return $data->tid;
 }
 
