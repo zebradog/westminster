@@ -19,6 +19,13 @@ function zebradog_install_tasks() {
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_blocks',
   );
+  $tasks['enable_terms'] = array(
+    'display_name' => t('Enabling vocabulary terms'),
+    'display' => TRUE,
+    'type' => 'normal',
+    'run' => 'INSTALL_TASK_IF_REACHED',
+    'function' => 'enable_taxonomy_terms',
+  );
   return $tasks;
 }
 function enable_bootstrap() {
