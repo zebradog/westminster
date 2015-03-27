@@ -183,7 +183,7 @@ function _zebradog_terms_load_terms($terms, $vocab_name, $parent = NULL){
   $vocab = taxonomy_vocabulary_machine_name_load($vocab_name);
   $parent_tid = 0;
   if (!is_null($parent)) {
-    $parent_term = taxonomy_get_term_by_name($parent, $vocab_name);
+    $parent_term = array_shift(taxonomy_get_term_by_name($parent, $vocab_name));
     $parent_tid  = $parent_term->tid;
   }
   foreach ($terms as $weight=>$term) {
