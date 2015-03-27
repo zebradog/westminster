@@ -84,6 +84,20 @@ function enable_blocks() {
  * Implementation of hook_install().
  */
 function enable_taxonomy_terms(){
+// Displays taxonomy terms
+  $displays = array(
+    -32 => 'Lobby',
+    -31 => 'Tradeshow',
+  );
+  _zebradog_terms_load_terms($displays, 'displays');
+// Scenarios taxonomy terms
+  $scenarios = array(
+    -32 => 'Interactive Content',
+    -31 => 'Slideshow Scenario',
+    -30 => 'Video Scenario',
+  );
+  _zebradog_terms_load_terms($scenarios, 'scenario_type');
+
 // Category taxonomy terms
   $categories = array(
     -32 => 'Eastern Province',   // 0
@@ -104,12 +118,12 @@ function enable_taxonomy_terms(){
     -31 => 'Exploration',      // Upstream
     -30 => 'Drilling',         // Upstream
   );
-  _zebradog_terms_load_terms($categories, 'categories','Upstream');
+  _zebradog_terms_load_terms($upstream, 'categories','Upstream');
   $downstream = array(
     -31 => 'Refining',
     -30 => 'Distribution',
   );
-  _zebradog_terms_load_terms($categories, 'categories','Downstream');
+  _zebradog_terms_load_terms($downstream, 'categories','Downstream');
   $lifestyle = array(
     -31 => 'Education',
     -30 => 'Healthcare',
@@ -124,9 +138,7 @@ function enable_taxonomy_terms(){
     -30 => 'Repat Trips',
   );
   _zebradog_terms_load_terms($lifestyle, 'categories','Lifestyle');
-  _zebradog_terms_load_terms($lifestyle, 'categories','Travel');
-
-
+  _zebradog_terms_load_terms($lifestyle_travel, 'categories','Travel');
 
   $saudi_arabia = array(
     -31 => 'Regions',
@@ -161,19 +173,6 @@ function enable_taxonomy_terms(){
   );
   _zebradog_terms_load_terms($community_services, 'categories', 'Community Services');
 
-// Displays taxonomy terms
-  $displays = array(
-    -32 => 'Lobby',
-    -31 => 'Tradeshow',
-  );
-  _zebradog_terms_load_terms($displays, 'displays');
-// Scenarios taxonomy terms
-  $scenarios = array(
-    -32 => 'Interactive Content',
-    -31 => 'Slideshow Scenario',
-    -30 => 'Video Scenario',
-  );
-  _zebradog_terms_load_terms($scenarios, 'scenario_type');
 }
 
 /**
