@@ -86,125 +86,135 @@ function enable_blocks() {
 function enable_taxonomy_terms(){
 // Category taxonomy terms
   $categories = array(
-    'Eastern Province',
-    'Upstream' => array(
-      'Exploration',
-      'Drilling',
-    ),
-    'Support',
-    'Aramco History',
-    'Environment',
-    'Downstream' => array(
-      'Refining',
-      'Distribution',
-    ),
-    'Joint Ventures',
-    'Lifestyle' => array(
-      'Education',
-      'Healthcare',
-      'Communities',
-      'Leisure',
-      'Travel' => array(
-        'Vacation/School Trips',
-        'Repat Trips',
-      ),
-      'Shopping',
-      'Transportation',
-    ),
-    'Saudi Arabia' => array(
-      'Regions' => array(
-        'Central Area',
-      ),
-      'Saudi Arabian History',
-      'Geography',
-      'Biology',
-      'Climate',
-      'Culture',
-    ),
-    'Recruiting',
-    'Operations Areas' => array(
-      'Maps',
-      'International Operations',
-      'Operations in Saudi Arabia' => array(
-        'Udhaliyah',
-        'Abqaiq',
-        'Dhahran',
-        'Ras Tanura',
-      ),
-    ),
-    'Community Services' => array(
-      'ASC Community Services',
-      'SA Community Services',
-    ),
+    -32 => 'Eastern Province',   // 0
+    -31 => 'Upstream',
+    -30 => 'Support',
+    -29 => 'Aramco History',
+    -28 => 'Environment',
+    -27 => 'Downstream',
+    -26 => 'Joint Ventures',
+    -25 => 'Lifestyle',
+    -24 => 'Saudi Arabia',
+    -23 => 'Recruiting',
+    -22 => 'Operations Areas',
+    -21 => 'Community Services',
   );
-  _zebradog_terms_load_terms($categories, 'Categories');
+  _zebradog_terms_load_terms($categories, 'categories');
+  $upstream = array(
+    -31 => 'Exploration',      // Upstream
+    -30 => 'Drilling',         // Upstream
+  );
+  _zebradog_terms_load_terms($categories, 'categories','Upstream');
+  $downstream = array(
+    -31 => 'Refining',
+    -30 => 'Distribution',
+  );
+  _zebradog_terms_load_terms($categories, 'categories','Downstream');
+  $lifestyle = array(
+    -31 => 'Education',
+    -30 => 'Healthcare',
+    -29 => 'Communities',
+    -28 => 'Leisure',
+    -27 => 'Travel',
+    -26 => 'Shopping',
+    -25 => 'Transportation',
+  );
+  $lifestyle_travel = array(
+    -31 => 'Vacation/School Trips',
+    -30 => 'Repat Trips',
+  );
+  _zebradog_terms_load_terms($lifestyle, 'categories','Lifestyle');
+  _zebradog_terms_load_terms($lifestyle, 'categories','Travel');
+
+
+
+  $saudi_arabia = array(
+    -31 => 'Regions',
+    -30 => 'Saudi Arabian History',
+    -29 => 'Geography',
+    -28 => 'Biology',
+    -27 => 'Climate',
+    -26 => 'Culture',
+  );
+  $saudi_arabia_regions = array(
+    -31 => 'Central Area',
+  );
+  _zebradog_terms_load_terms($saudi_arabia, 'categories','Saudi Arabia');
+  _zebradog_terms_load_terms($saudi_arabia_regions, 'categories','Regions');
+  $operations_areas = array(
+    -31 => 'Maps',
+    -30 => 'International Operations',
+    -29 => 'Operations in Saudi Arabia',
+  );
+  $operations_areas_in_saudi_arabia = array(
+    -31 => 'Udhaliyah',
+    -30 => 'Abqaiq',
+    -29 => 'Dhahran',
+    -28 => 'Ras Tanura',
+  );
+  _zebradog_terms_load_terms($operations_areas, 'categories', 'Operation Areas');
+  _zebradog_terms_load_terms($operations_areas_in_saudi_arabia, 'categories', 'Operations in Saudi Arabia');
+
+  $community_services = array(
+    -31 => 'ASC Community Services',
+    -30 => 'SA Community Services',
+  );
+  _zebradog_terms_load_terms($community_services, 'categories', 'Community Services');
+
 // Displays taxonomy terms
   $displays = array(
     'Lobby',
     'Tradeshow',
   );
-  _zebradog_terms_load_terms($displays, 'Displays');
-// Map Categories taxonomy terms
-  $map_categories = array(
-    'Affiliate',
-    'Bulk Plant',
-    'Distribution & Shipping',
-    'Gas Plant',
-    'Joint/Equity Refinery',
-    'Oil Processing Complex',
-    'Refining & Chemicals',
-    'Sales & Marketing',
-    'Saudi Aramco Headquarters',
-    'Saudi Aramco Refinery',
-    'Seawater Treatment Plant',
-    'Services',
-    'Terminal',
-  );
-  _zebradog_terms_load_terms($map_categories, 'Map Categories');
-// Secnarios taxonomy terms
+  _zebradog_terms_load_terms($displays, 'displays');
+// Scenarios taxonomy terms
   $scenarios = array(
     'Interactive Content',
     'Slideshow Scenario',
     'Video Scenario',
   );
-  _zebradog_terms_load_terms($scenarios, 'Scenario Types');
+  _zebradog_terms_load_terms($scenarios, 'scenario_type');
 }
 
 /**
  * Custom function to load an array of terms into a specified vocabulary.
  */
-function _zebradog_terms_load_terms($terms, $vocab_name){
+function _zebradog_terms_load_terms($terms, $vocab_name, $parent = NULL){
   $vocab = taxonomy_vocabulary_machine_name_load($vocab_name);
   if ($vocab == false) {
     drupal_set_message('Error while attempting to install vocabulary ' . $vocab_name, 'error');
   } else {
+    $count = -32;
     foreach($terms as $term){
       $parent_tid = 0;
       if (!is_array($term)) {
-        $tid = _zebradog_save_term($term,$vocab->vid,$parent_tid);
+        $tid = _zebradog_save_term($term,$vocab->vid,$parent_tid,$count);
       } else {
         foreach ($term as $subterm)
         {
+          $subparent_tid = 0;
           if (!is_array($subterm)) {
-            $tid = _zebradog_save_term($subterm,$vocab->vid,$subparent_tid);
-            if ($parent_tid == 0) $parent_tid = $tid;
+            $tid = _zebradog_save_term($subterm,$vocab->vid,$subparent_tid,$count);
+            if ($subparent_tid == 0) $subparent_tid = $tid;
           } else {
             $subparent_tid = 0;
             foreach ($subterm as $subsub)
             {
-              $tid = _zebradog_save_term($subterm,$vocab->vid,$subparent_tid);
+              $tid = _zebradog_save_term($subterm,$vocab->vid,$subparent_tid,$count);
               if ($subparent_tid == 0) $subparent_tid = $tid;
             }
           }
         }
       }
+      $count++;
     }
   }
 }
-function _zebradog_save_term($term,$vid,$parent_tid) {
+function _zebradog_save_term($term,$vid,$parent_tid,$weight) {
   $data = new stdClass();
   $data->name = $term;
   $data->vid = $vid;
+  $data->weight = $weight;
   $data->parent = $parent_tid;
   taxonomy_term_save($data);
   return $data->tid;
