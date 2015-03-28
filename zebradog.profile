@@ -7,24 +7,31 @@ function zebradog_install_tasks() {
   $tasks = array();
   $tasks['enable_themes'] = array(
     'display_name' => t('Enabling themes'),
-    'display' => TRUE,
+    'display' => FALSE,
     'type' => 'normal',
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_bootstrap',
   );
   $tasks['enable_blocks'] = array(
     'display_name' => t('Enabling blocks'),
-    'display' => TRUE,
+    'display' => FALSE,
     'type' => 'normal',
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_blocks',
   );
   $tasks['enable_terms'] = array(
     'display_name' => t('Enabling vocabulary terms'),
-    'display' => TRUE,
+    'display' => FALSE,
     'type' => 'normal',
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_taxonomy_terms',
+  );
+  $tasks['add_sample_event'] = array(
+    'display_name' => t('Adding sample event'),
+    'display' => FALSE,
+    'type' => 'normal',
+    'run' => 'INSTALL_TASK_IF_REACHED',
+    'function' => 'add_sample_event',
   );
   return $tasks;
 }
@@ -175,6 +182,27 @@ function enable_taxonomy_terms(){
 
 }
 
+function add_sample_event() {
+  $node       = new stdClass();
+  $node->uid = 1;
+  $node->name = 'admin';
+  $node->type = 'scheduled_content';
+  node_object_prepare($node);
+  $node->uid = 1;
+  $node->name = 'admin';
+
+  $node->title = 'Sample Scheduled Event';
+  $node->language                                               = LANGUAGE_NONE;
+  $node->body[ $node->language ][ 0 ][ 'value' ]                = '';
+  $node->body[ $node->language ][ 0 ][ 'summary' ]              = '';
+  $node->body[ $node->language ][ 0 ][ 'format' ]               = 'filtered_html';
+  $node->field_date[ $node->language ][ 0 ][ 'value' ]    = date('c',strtotime('today'));
+  $node->field_date[ $node->language ][ 0 ][ 'value2' ]   = date('c',strtotime('tomorrow'));
+  $node->field_display_term[ $node->language ][ 0 ][ 'tid' ]   = 1;
+  $node->field_scenario[ $node->language ][ 0 ][ 'value' ]   = 1;
+  node_save($node);
+}
+
 /**
  * Custom function to load an array of terms into a specified vocabulary.
  */
@@ -182,7 +210,7 @@ function _zebradog_terms_load_terms($terms, $vocab_name, $parent = NULL){
   $vocab = taxonomy_vocabulary_machine_name_load($vocab_name);
   $parent_tid = 0;
   if (!is_null($parent)) {
-    $parent_term = array_shift(taxonomy_get_term_by_name($parent, $vocab_name));
+    $parent_term = @array_shift(taxonomy_get_term_by_name($parent, $vocab_name));
     $parent_tid  = $parent_term->tid;
   }
   foreach ($terms as $weight=>$term) {
