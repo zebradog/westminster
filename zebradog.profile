@@ -196,10 +196,11 @@ function add_sample_event() {
   $node->body[ $node->language ][ 0 ][ 'value' ]                = '';
   $node->body[ $node->language ][ 0 ][ 'summary' ]              = '';
   $node->body[ $node->language ][ 0 ][ 'format' ]               = 'filtered_html';
-  $node->field_date[ $node->language ][ 0 ][ 'value' ]    = date('c',strtotime('today'));
-  $node->field_date[ $node->language ][ 0 ][ 'value2' ]   = date('c',strtotime('tomorrow'));
+  $node->field_date[ $node->language ][ 0 ][ 'value' ]    = date('Y-m-d H:i:s',strtotime('today'));
+  $node->field_date[ $node->language ][ 0 ][ 'value2' ]   = date('Y-m-d H:i:s',strtotime('tomorrow'));
   $node->field_display_term[ $node->language ][ 0 ][ 'tid' ]   = 1;
   $node->field_scenario[ $node->language ][ 0 ][ 'value' ]   = 1;
+  $node->status = 1;
   node_save($node);
 }
 
