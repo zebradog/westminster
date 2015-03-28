@@ -61,19 +61,19 @@ function zebradog_schedule_page_schedule() {
       'css' => array(
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.resizable.min.css',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.resizable.min.css',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/themes/zebradog_ui/css/style.css',
+          'data' => 'profiles/zebradog/themes/custom/zebradog_ui/css/style.css',
         ),
         array(
           'type' => 'file',
@@ -87,39 +87,39 @@ function zebradog_schedule_page_schedule() {
       'js' => array(
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.mouse.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.mouse.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.draggable.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.draggable.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.droppable.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.droppable.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.resizable.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.resizable.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect-highlight.min.js',
+          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect-highlight.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'sites/all/libraries/fullcalendar/fullcalendar.js',
+          'data' => 'profiles/zebradog/libraries/fullcalendar/fullcalendar/fullcalendar.js',
         ),
         array(
           'type' => 'file',
