@@ -79,6 +79,9 @@ function zebradog_schedule_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_default_scenario',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -230,28 +233,6 @@ function zebradog_schedule_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_scenario'
-  $field_bases['field_scenario'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_scenario',
-    'indexes' => array(
-      'revision_id' => array(
-        0 => 'revision_id',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'field_collection',
-    'settings' => array(
-      'hide_blank_items' => 1,
-      'path' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'field_collection',
-  );
-
   // Exported field_base: 'field_screensaver_text'
   $field_bases['field_screensaver_text'] = array(
     'active' => 1,
@@ -364,13 +345,13 @@ function zebradog_schedule_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_video_scenario'
-  $field_bases['field_video_scenario'] = array(
+  // Exported field_base: 'field_video'
+  $field_bases['field_video'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_video_scenario',
+    'field_name' => 'field_video',
     'field_permissions' => array(
       'type' => 0,
     ),

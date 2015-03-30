@@ -10,107 +10,6 @@
 function zebradog_schedule_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'field_collection_item-field_scenario-field_default_scenario'
-  $field_instances['field_collection_item-field_scenario-field_default_scenario'] = array(
-    'bundle' => 'field_scenario',
-    'default_value' => array(
-      0 => array(
-        'tid' => 51,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_default_scenario',
-    'label' => 'Default Scenario',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'field_collection_item-field_scenario-field_slideshow'
-  $field_instances['field_collection_item-field_scenario-field_slideshow'] = array(
-    'bundle' => 'field_scenario',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_slideshow',
-    'label' => 'Slideshow',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance: 'field_collection_item-field_scenario-field_video_scenario'
-  $field_instances['field_collection_item-field_scenario-field_video_scenario'] = array(
-    'bundle' => 'field_scenario',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_video_scenario',
-    'label' => 'Video',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 5,
-    ),
-  );
-
   // Exported field_instance: 'node-interactive_scenario-field_categories'
   $field_instances['node-interactive_scenario-field_categories'] = array(
     'bundle' => 'interactive_scenario',
@@ -435,7 +334,7 @@ function zebradog_schedule_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -494,6 +393,47 @@ function zebradog_schedule_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-scheduled_content-field_default_scenario'
+  $field_instances['node-scheduled_content-field_default_scenario'] = array(
+    'bundle' => 'scheduled_content',
+    'default_value' => array(
+      0 => array(
+        'tid' => 51,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_default_scenario',
+    'label' => 'Default Scenario',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-scheduled_content-field_display_term'
   $field_instances['node-scheduled_content-field_display_term'] = array(
     'bundle' => 'scheduled_content',
@@ -531,8 +471,8 @@ function zebradog_schedule_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-scheduled_content-field_scenario'
-  $field_instances['node-scheduled_content-field_scenario'] = array(
+  // Exported field_instance: 'node-scheduled_content-field_slideshow'
+  $field_instances['node-scheduled_content-field_slideshow'] = array(
     'bundle' => 'scheduled_content',
     'default_value' => NULL,
     'deleted' => 0,
@@ -540,16 +480,12 @@ function zebradog_schedule_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'field_collection',
+        'module' => 'entityreference',
         'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
-          'view_mode' => 'full',
+          'link' => FALSE,
         ),
-        'type' => 'field_collection_view',
-        'weight' => 2,
+        'type' => 'entityreference_label',
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -559,18 +495,57 @@ function zebradog_schedule_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_scenario',
-    'label' => 'Scenario',
-    'required' => 1,
+    'field_name' => 'field_slideshow',
+    'label' => 'Slideshow',
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'field_collection',
+      'active' => 1,
+      'module' => 'options',
       'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 4,
+      'type' => 'options_select',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-scheduled_content-field_video'
+  $field_instances['node-scheduled_content-field_video'] = array(
+    'bundle' => 'scheduled_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 9,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_video',
+    'label' => 'Video',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
     ),
   );
 
@@ -796,6 +771,37 @@ function zebradog_schedule_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-displays-field_default_scenario'
+  $field_instances['taxonomy_term-displays-field_default_scenario'] = array(
+    'bundle' => 'displays',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_default_scenario',
+    'label' => 'Default Scenario',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-displays-field_notes'
   $field_instances['taxonomy_term-displays-field_notes'] = array(
     'bundle' => 'displays',
@@ -898,41 +904,6 @@ function zebradog_schedule_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-displays-field_scenario'
-  $field_instances['taxonomy_term-displays-field_scenario'] = array(
-    'bundle' => 'displays',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'field_collection',
-        'settings' => array(
-          'add' => 'Add',
-          'delete' => 'Delete',
-          'description' => TRUE,
-          'edit' => 'Edit',
-          'view_mode' => 'full',
-        ),
-        'type' => 'field_collection_view',
-        'weight' => 5,
-      ),
-    ),
-    'entity_type' => 'taxonomy_term',
-    'field_name' => 'field_scenario',
-    'label' => 'Scenario',
-    'required' => FALSE,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'field_collection',
-      'settings' => array(),
-      'type' => 'field_collection_embed',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'taxonomy_term-displays-field_show_cursor'
   $field_instances['taxonomy_term-displays-field_show_cursor'] = array(
     'bundle' => 'displays',
@@ -970,6 +941,72 @@ function zebradog_schedule_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-displays-field_slideshow'
+  $field_instances['taxonomy_term-displays-field_slideshow'] = array(
+    'bundle' => 'displays',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_slideshow',
+    'label' => 'Slideshow',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'taxonomy_term-displays-field_video'
+  $field_instances['taxonomy_term-displays-field_video'] = array(
+    'bundle' => 'displays',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 9,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_video',
+    'label' => 'Video',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 14,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Categories');
@@ -980,7 +1017,6 @@ function zebradog_schedule_field_default_field_instances() {
   t('Notes');
   t('Optimize');
   t('Resolution');
-  t('Scenario');
   t('Screensaver Text');
   t('Show Cursor');
   t('Slideshow');

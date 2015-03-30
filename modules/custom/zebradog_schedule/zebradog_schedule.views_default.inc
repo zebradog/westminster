@@ -44,13 +44,12 @@ function zebradog_schedule_views_default_views() {
   $handler->display->display_options['style_options']['unescaped_slashes'] = 0;
   $handler->display->display_options['style_options']['unescaped_unicode'] = 0;
   $handler->display->display_options['style_options']['char_encoding'] = array();
-  /* Relationship: Field: Scenario (field_scenario) */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['field_scenario_value']['id'] = 'field_scenario_value';
   $handler->display->display_options['relationships']['field_scenario_value']['table'] = 'field_data_field_scenario';
   $handler->display->display_options['relationships']['field_scenario_value']['field'] = 'field_scenario_value';
   $handler->display->display_options['relationships']['field_scenario_value']['label'] = 'field_scenario';
   $handler->display->display_options['relationships']['field_scenario_value']['required'] = TRUE;
-  $handler->display->display_options['relationships']['field_scenario_value']['delta'] = '-1';
   /* Field: Content: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
@@ -83,7 +82,7 @@ function zebradog_schedule_views_default_views() {
   );
   $handler->display->display_options['fields']['field_date_1']['group_rows'] = FALSE;
   $handler->display->display_options['fields']['field_date_1']['delta_offset'] = '0';
-  /* Field: Field collection item: Default Scenario */
+  /* Field: Field: Default Scenario */
   $handler->display->display_options['fields']['field_default_scenario']['id'] = 'field_default_scenario';
   $handler->display->display_options['fields']['field_default_scenario']['table'] = 'field_data_field_default_scenario';
   $handler->display->display_options['fields']['field_default_scenario']['field'] = 'field_default_scenario';
@@ -93,7 +92,7 @@ function zebradog_schedule_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Field: Field collection item: Default Scenario */
+  /* Field: Field: Default Scenario */
   $handler->display->display_options['fields']['field_default_scenario_1']['id'] = 'field_default_scenario_1';
   $handler->display->display_options['fields']['field_default_scenario_1']['table'] = 'field_data_field_default_scenario';
   $handler->display->display_options['fields']['field_default_scenario_1']['field'] = 'field_default_scenario';
@@ -101,7 +100,7 @@ function zebradog_schedule_views_default_views() {
   $handler->display->display_options['fields']['field_default_scenario_1']['label'] = 'Tid';
   $handler->display->display_options['fields']['field_default_scenario_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_default_scenario_1']['alter']['text'] = '[field_default_scenario_1-tid]';
-  /* Field: Field collection item: Slideshow */
+  /* Field: Field: Slideshow */
   $handler->display->display_options['fields']['field_slideshow']['id'] = 'field_slideshow';
   $handler->display->display_options['fields']['field_slideshow']['table'] = 'field_data_field_slideshow';
   $handler->display->display_options['fields']['field_slideshow']['field'] = 'field_slideshow';
@@ -109,14 +108,11 @@ function zebradog_schedule_views_default_views() {
   $handler->display->display_options['fields']['field_slideshow']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Field collection item: Video */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_video_scenario']['id'] = 'field_video_scenario';
   $handler->display->display_options['fields']['field_video_scenario']['table'] = 'field_data_field_video_scenario';
   $handler->display->display_options['fields']['field_video_scenario']['field'] = 'field_video_scenario';
   $handler->display->display_options['fields']['field_video_scenario']['relationship'] = 'field_scenario_value';
-  $handler->display->display_options['fields']['field_video_scenario']['settings'] = array(
-    'link' => 0,
-  );
   /* Field: Content: Display */
   $handler->display->display_options['fields']['field_display_term']['id'] = 'field_display_term';
   $handler->display->display_options['fields']['field_display_term']['table'] = 'field_data_field_display_term';
@@ -197,7 +193,7 @@ function zebradog_schedule_views_default_views() {
   );
   $handler->display->display_options['fields']['field_date_1']['group_rows'] = FALSE;
   $handler->display->display_options['fields']['field_date_1']['delta_offset'] = '0';
-  /* Field: Field collection item: Default Scenario */
+  /* Field: Field: Default Scenario */
   $handler->display->display_options['fields']['field_default_scenario']['id'] = 'field_default_scenario';
   $handler->display->display_options['fields']['field_default_scenario']['table'] = 'field_data_field_default_scenario';
   $handler->display->display_options['fields']['field_default_scenario']['field'] = 'field_default_scenario';
@@ -207,7 +203,7 @@ function zebradog_schedule_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  /* Field: Field collection item: Default Scenario */
+  /* Field: Field: Default Scenario */
   $handler->display->display_options['fields']['field_default_scenario_1']['id'] = 'field_default_scenario_1';
   $handler->display->display_options['fields']['field_default_scenario_1']['table'] = 'field_data_field_default_scenario';
   $handler->display->display_options['fields']['field_default_scenario_1']['field'] = 'field_default_scenario';
@@ -215,7 +211,7 @@ function zebradog_schedule_views_default_views() {
   $handler->display->display_options['fields']['field_default_scenario_1']['label'] = 'Tid';
   $handler->display->display_options['fields']['field_default_scenario_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_default_scenario_1']['alter']['text'] = '[field_default_scenario_1-tid]';
-  /* Field: Field collection item: Slideshow */
+  /* Field: Field: Slideshow */
   $handler->display->display_options['fields']['field_slideshow']['id'] = 'field_slideshow';
   $handler->display->display_options['fields']['field_slideshow']['table'] = 'field_data_field_slideshow';
   $handler->display->display_options['fields']['field_slideshow']['field'] = 'field_slideshow';
@@ -223,14 +219,11 @@ function zebradog_schedule_views_default_views() {
   $handler->display->display_options['fields']['field_slideshow']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Field collection item: Video */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_video_scenario']['id'] = 'field_video_scenario';
   $handler->display->display_options['fields']['field_video_scenario']['table'] = 'field_data_field_video_scenario';
   $handler->display->display_options['fields']['field_video_scenario']['field'] = 'field_video_scenario';
   $handler->display->display_options['fields']['field_video_scenario']['relationship'] = 'field_scenario_value';
-  $handler->display->display_options['fields']['field_video_scenario']['settings'] = array(
-    'link' => 0,
-  );
   /* Field: Content: Display */
   $handler->display->display_options['fields']['field_display_term']['id'] = 'field_display_term';
   $handler->display->display_options['fields']['field_display_term']['table'] = 'field_data_field_display_term';
