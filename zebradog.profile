@@ -26,13 +26,13 @@ function zebradog_install_tasks() {
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_taxonomy_terms',
   );
-/*  $tasks['add_sample_event'] = array(
+  $tasks['add_sample_event'] = array(
     'display_name' => t('Adding sample event'),
     'display' => FALSE,
     'type' => 'normal',
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'add_sample_event',
-  );*/
+  );
   return $tasks;
 }
 function enable_bootstrap() {
@@ -184,7 +184,7 @@ function enable_taxonomy_terms(){
 
 function add_sample_event() {
   $display_term = @array_shift(taxonomy_get_term_by_name('lobby', 'displays'));
-  $scenario_term = @array_shift(taxonomy_get_term_by_name('interactive-content', 'scenario_type'));
+  // $scenario_term = @array_shift(taxonomy_get_term_by_name('interactive-content', 'scenario_type'));
   $node       = new stdClass();
   $node->uid = 1;
   $node->name = 'admin';
@@ -201,7 +201,7 @@ function add_sample_event() {
   $node->field_date[ $node->language ][ 0 ][ 'value' ]    = date('Y-m-d H:i:s',strtotime('today'));
   $node->field_date[ $node->language ][ 0 ][ 'value2' ]   = date('Y-m-d H:i:s',strtotime('tomorrow'));
   $node->field_display_term[ $node->language ][ 0 ][ 'tid' ]   = (isset($display_term) && is_object($display_term) && property_exists($display_term,'tid')) ? $display_term->tid : 1 ;
-  $node->field_scenario[ $node->language ][ 0 ][ 'value' ]   = (isset($scenario_term) && is_object($scenario_term) && property_exists($scenario_term,'tid')) ? $scenario_term->tid : 3 ;
+  // $node->field_scenario[ $node->language ][ 0 ][ 'value' ]   = (isset($scenario_term) && is_object($scenario_term) && property_exists($scenario_term,'tid')) ? $scenario_term->tid : 3 ;
   $node->status = 1;
   node_save($node);
 }
