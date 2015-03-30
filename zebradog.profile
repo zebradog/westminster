@@ -38,7 +38,7 @@ function zebradog_install_tasks() {
 function enable_bootstrap() {
   theme_enable(array('bootstrap','zd_ui'));
   variable_set('theme_default','zd_ui');
-  variable_set('admin_theme','seven');
+  variable_set('admin_theme','zd_ui');
   variable_set('node_admin_theme','zd_ui');
 }
 function enable_blocks() {
@@ -212,7 +212,7 @@ function _zebradog_terms_load_terms($terms, $vocab_name, $parent = NULL){
   $parent_tid = 0;
   if (!is_null($parent)) {
     $parent_term = @array_shift(taxonomy_get_term_by_name($parent, $vocab_name));
-    $parent_tid  = $parent_term->tid;
+    $parent_tid  = (isset($parent_term) && is_object($parent_term) && property_exists($parent_term,'tid')) ? $parent_term->tid : 0 ;
   }
   foreach ($terms as $weight=>$term) {
     $data         = new stdClass();
