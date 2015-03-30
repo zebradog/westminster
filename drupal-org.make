@@ -2,7 +2,7 @@ core = "7.x"
 api = "2"
 
 ; Modules
-projects[admin_menu][subdir] = "contrib"
+; projects[admin_menu][subdir] = "contrib"
 projects[admin_views][subdir] = "contrib"
 projects[auto_nodetitle][subdir] = "contrib"
 projects[block_class][subdir] = "contrib"
