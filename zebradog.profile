@@ -26,13 +26,13 @@ function zebradog_install_tasks() {
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'enable_taxonomy_terms',
   );
-  $tasks['add_sample_event'] = array(
+/*  $tasks['add_sample_event'] = array(
     'display_name' => t('Adding sample event'),
     'display' => FALSE,
     'type' => 'normal',
     'run' => 'INSTALL_TASK_IF_REACHED',
     'function' => 'add_sample_event',
-  );
+  );*/
   return $tasks;
 }
 function enable_bootstrap() {
