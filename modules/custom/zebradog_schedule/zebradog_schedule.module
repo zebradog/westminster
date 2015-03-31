@@ -201,7 +201,7 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-function zebradog_schedule_taxonomy_term_insert($term) {
+/*function zebradog_schedule_taxonomy_term_insert($term) {
   $vobj = taxonomy_vocabulary_machine_name_load('displays');
   if ($term->vid == $vobj->vid) {
     // If term is a member of the displays vocabulary, create a menu entry under Schedules
@@ -231,6 +231,5 @@ function zebradog_schedule_taxonomy_term_insert($term) {
       ))
       ->condition('mlid',$item_id)
       ->execute();
-    watchdog('term_to_menu',':menu_name (:tid) :item_id inserted as a child of :parent',array(':menu_name' => $term->name, ':tid' => $term->tid, ':item_id' => $item_id, ':parent' => 313));
   }
-}
+}*/
