@@ -215,7 +215,7 @@ function zebradog_schedule_taxonomy_term_insert($term) {
         'attributes' => array(
           'title' => '',
         ),
-        'identifier' => 'management_'.$term->machine_name.'-schedule:admin/schedule/'.$term->tid,
+        'identifier' => 'management_'.strtolower($term->name).'-schedule:admin/schedule/'.$term->tid,
       ),
       'module' => 'menu',
       'hidden' => 0,
@@ -227,6 +227,6 @@ function zebradog_schedule_taxonomy_term_insert($term) {
       'parent_identifier' => 'management_schedule:admin/schedule',
 
     );
-    $item_id = menu_link_save($item);
+    $item_id = menu_link_save($item,array(),array($parent_menu->mlid => $parent_menu));
   }
 }
