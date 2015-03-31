@@ -197,7 +197,7 @@ function add_sample_event() {
     $node->uid  = 1;
     $node->name = 'admin';
 
-    $node->title                                               = 'Sample Scheduled Event';
+    $node->title                                               = 'Sample Scheduled Event - '.$title;
     $node->language                                            = LANGUAGE_NONE;
     $node->body[ $node->language ][ 0 ][ 'value' ]             = '';
     $node->body[ $node->language ][ 0 ][ 'summary' ]           = '';
