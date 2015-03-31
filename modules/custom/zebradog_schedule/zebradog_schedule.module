@@ -204,6 +204,7 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
 function zebradog_schedule_taxonomy_term_insert($term) {
   $vobj = taxonomy_vocabulary_machine_name_load('displays');
   $parent_menu = menu_get_item('admin/schedule');
+  dsm($parent_menu);
   if ($term->vid == $vobj->vid) {
     // If term is a member of the displays vocabulary, create a menu entry under Schedules
     $item = array(
