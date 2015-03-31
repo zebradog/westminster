@@ -206,12 +206,25 @@ function zebradog_schedule_taxonomy_term_insert($term) {
   if ($term->vid == $vobj->vid) {
     // If term is a member of the displays vocabulary, create a menu entry under Schedules
     $item = array(
-      'link_path' => 'admin/schedule/'.$term->tid,
-      'link_title' => $term->name.' Schedule',
       'menu_name' => 'management',
+      'link_path' => 'admin/schedule/'.$term->tid,
+      'router_path' => 'admin/schedule/%',
+      'link_title' => $term->name.' Schedule',
+      'options' => array(
+        'attributes' => array(
+          'title' => '',
+        ),
+        'identifier' => 'management_lobby-schedule:admin/schedule/'.$term->tid,
+      ),
+      'module' => 'menu',
+      'hidden' => 0,
+      'external' => 0,
+      'has_children' => 0,
+      'expanded' => 0,
       'weight' => 0,
-      'expanded' => FALSE,
+      'customized' => 1,
       'parent_identifier' => 'management_schedule:admin/schedule',
+
     );
     $item_id = menu_link_save($item);
   }

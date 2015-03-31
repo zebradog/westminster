@@ -73,10 +73,8 @@ function zebradog_schedule_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
-  t('Lobby Schedule');
   t('Preview');
   t('Schedule');
-  t('Tradeshow Schedule');
 
 
   return $menu_links;
