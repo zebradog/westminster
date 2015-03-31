@@ -200,3 +200,19 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
 }
+
+function zebradog_schedule_taxonomy_term_insert($term) {
+  $vobj = taxonomy_vocabulary_machine_name_load('displays');
+  if ($term->vid == $vobj->vid) {
+    // If term is a member of the displays vocabulary, create a menu entry under Schedules
+    $item = array(
+      'link_path' => 'admin/schedule/'.$term->tid,
+      'link_title' => $term->name.' Schedule',
+      'menu_name' => 'management',
+      'weight' => 0,
+      'expanded' => FALSE,
+      'parent_identifier' => 'management_schedule:admin/schedule',
+    );
+    $item_id = menu_link_save($item);
+  }
+}

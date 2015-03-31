@@ -183,27 +183,41 @@ function enable_taxonomy_terms(){
 }
 
 function add_sample_event() {
-  $display_term = @array_shift(taxonomy_get_term_by_name('lobby', 'displays'));
-  // $scenario_term = @array_shift(taxonomy_get_term_by_name('interactive-content', 'scenario_type'));
-  $node       = new stdClass();
-  $node->uid = 1;
-  $node->name = 'admin';
-  $node->type = 'scheduled_content';
-  node_object_prepare($node);
-  $node->uid = 1;
-  $node->name = 'admin';
+  $displays = array(
+    'lobby' => 'Lobby',
+    'tradeshow' => 'Tradeshow',
+  );
+  foreach ($displays as $machine_name => $title) {
+    $display_term = @array_shift(taxonomy_get_term_by_name($machine_name, 'displays'));
+    $node       = new stdClass();
+    $node->uid  = 1;
+    $node->name = 'admin';
+    $node->type = 'scheduled_content';
+    node_object_prepare($node);
+    $node->uid  = 1;
+    $node->name = 'admin';
 
-  $node->title = 'Sample Scheduled Event';
-  $node->language                                               = LANGUAGE_NONE;
-  $node->body[ $node->language ][ 0 ][ 'value' ]                = '';
-  $node->body[ $node->language ][ 0 ][ 'summary' ]              = '';
-  $node->body[ $node->language ][ 0 ][ 'format' ]               = 'filtered_html';
-  $node->field_date[ $node->language ][ 0 ][ 'value' ]    = date('Y-m-d H:i:s',strtotime('today'));
-  $node->field_date[ $node->language ][ 0 ][ 'value2' ]   = date('Y-m-d H:i:s',strtotime('tomorrow'));
-  $node->field_display_term[ $node->language ][ 0 ][ 'tid' ]   = (isset($display_term) && is_object($display_term) && property_exists($display_term,'tid')) ? $display_term->tid : 1 ;
-  // $node->field_scenario[ $node->language ][ 0 ][ 'value' ]   = (isset($scenario_term) && is_object($scenario_term) && property_exists($scenario_term,'tid')) ? $scenario_term->tid : 3 ;
-  $node->status = 1;
-  node_save($node);
+    $node->title                                               = 'Sample Scheduled Event';
+    $node->language                                            = LANGUAGE_NONE;
+    $node->body[ $node->language ][ 0 ][ 'value' ]             = '';
+    $node->body[ $node->language ][ 0 ][ 'summary' ]           = '';
+    $node->body[ $node->language ][ 0 ][ 'format' ]            = 'filtered_html';
+    $node->field_date[ $node->language ][ 0 ][ 'value' ]       = date('Y-m-d H:i:s', strtotime('today'));
+    $node->field_date[ $node->language ][ 0 ][ 'value2' ]      = date('Y-m-d H:i:s', strtotime('tomorrow'));
+    $node->field_display_term[ $node->language ][ 0 ][ 'tid' ] = (isset($display_term) && is_object($display_term) && property_exists($display_term, 'tid')) ? $display_term->tid : 1;
+    $node->status = 1;
+    node_save($node);
+    // Now add a menu item
+    $item = array(
+      'link_path' => 'admin/schedule/'.$display_term->tid,
+      'link_title' => $title.' Schedule',
+      'menu_name' => 'management',
+      'weight' => 0,
+      'expanded' => FALSE,
+      'parent_identifier' => 'management_schedule:admin/schedule',
+    );
+    $item_id = menu_link_save($item);
+  }
 }
 
 /**
