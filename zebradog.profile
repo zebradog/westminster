@@ -207,28 +207,6 @@ function add_sample_event() {
     $node->field_display_term[ $node->language ][ 0 ][ 'tid' ] = (isset($display_term) && is_object($display_term) && property_exists($display_term, 'tid')) ? $display_term->tid : 1;
     $node->status = 1;
     node_save($node);
-    // Now add a menu item
-    $item = array(
-      'menu_name' => 'management',
-      'link_path' => 'admin/schedule/'.$display_term->tid,
-      'router_path' => 'admin/schedule/%',
-      'link_title' => $title.' Schedule',
-      'options' => array(
-        'attributes' => array(
-          'title' => '',
-        ),
-        'identifier' => 'management_lobby-schedule:admin/schedule/'.$display_term->tid,
-      ),
-      'module' => 'menu',
-      'hidden' => 0,
-      'external' => 0,
-      'has_children' => 0,
-      'expanded' => 0,
-      'weight' => 0,
-      'customized' => 1,
-      'parent_identifier' => 'management_schedule:admin/schedule',
-    );
-    $item_id = menu_link_save($item);
   }
 }
 
