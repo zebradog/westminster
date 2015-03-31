@@ -119,7 +119,7 @@ function zebradog_schedule_page_schedule($display_id=NULL) {
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/libraries/fullcalendar/fullcalendar.js',
+          'data' => 'profiles/zebradog/libraries/fullcalendar/fullcalendar/fullcalendar.js',
         ),
         array(
           'type' => 'file',
