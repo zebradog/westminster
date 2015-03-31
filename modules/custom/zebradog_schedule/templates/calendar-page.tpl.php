@@ -6,6 +6,7 @@ $scenarios = taxonomy_get_tree($myvoc->vid);
 $name = 'displays';
 $myvoc = taxonomy_vocabulary_machine_name_load($name);
 $displays = taxonomy_get_tree($myvoc->vid);
+$display_id = substr(current_path(),strripos(current_path(),"/")+1);
 ?>
 <div id='wrap'>
 
@@ -21,9 +22,17 @@ $displays = taxonomy_get_tree($myvoc->vid);
 <h4>Displays</h4>
   <?php
   foreach ($displays as $s) {
-    echo "<div class='taxonomy-checkbox'><input type='checkbox' name='display_".$s->tid."' id='display_".$s->tid."' checked data-tid='".$s->tid."' /><label for='display_".$s->tid."'>".$s->name."</label></div>"."\n";
+    if ($s->tid == $display_id)
+    {
+      echo "<div class='taxonomy-checkbox'><strong>&raquo; ".$s->name."</strong></div>"."\n";
+      echo '<script>jQuery(".page-header").text("'.$s->name.' Display Schedule");</script>';
+    }
+    else
+    {
+      echo "<div class='taxonomy-checkbox'><a href='/admin/schedule/".$s->tid."'>".$s->name."</a></div>"."\n";
+    }
   } ?>
-  <p>Uncheck checkboxes to hide events with that kind of display.</p>
+  <p>Click links to show events with that kind of display.</p>
 </div>
 
 <div id='calendar'></div>

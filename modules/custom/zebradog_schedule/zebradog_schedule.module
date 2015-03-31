@@ -14,13 +14,13 @@ include_once 'zebradog_schedule.features.inc';
 function zebradog_schedule_menu() {
   $items = array();
 
-  $items['admin/schedule'] = array(
+  $items['admin/schedule/%'] = array(
     'title' => 'Schedule',
     'description' => 'Schedule',
     'page callback' => 'zebradog_schedule_page_schedule',
-    'page arguments' => array('highwire_settings'),
     'access arguments' => array('administer own schedule'),
-    'menu_name' => 'management',
+    'page arguments' => array(2),
+
   );
   return $items;
 }
@@ -40,7 +40,7 @@ function zebradog_schedule_permission() {
 /**
  * Implements hook_action_info().
  */
-function zebradog_schedule_page_schedule() {
+function zebradog_schedule_page_schedule($display_id=NULL) {
   // Create some data
   $data = array
   (
@@ -119,7 +119,7 @@ function zebradog_schedule_page_schedule() {
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/libraries/fullcalendar/fullcalendar/fullcalendar.js',
+          'data' => 'profiles/zebradog/libraries/fullcalendar/fullcalendar.js',
         ),
         array(
           'type' => 'file',
@@ -191,6 +191,10 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
         if (isset($params['field_scenario']))
         {
           $form['field_scenario']['und'][0]['field_default_scenario']['und']['#default_value'] = $params['field_scenario'];
+        }
+        if (isset($params['field_display']))
+        {
+          $form['field_display_term']['und']['#default_value'] = $params['field_display'];
         }
       }
       break;

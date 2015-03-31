@@ -30,6 +30,27 @@ function zebradog_schedule_menu_default_menu_links() {
     'weight' => -46,
     'customized' => 1,
   );
+  // Exported menu link: management_lobby-schedule:admin/schedule/69
+  $menu_links['management_lobby-schedule:admin/schedule/69'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/schedule/69',
+    'router_path' => 'admin/schedule/%',
+    'link_title' => 'Lobby Schedule',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'management_lobby-schedule:admin/schedule/69',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+    'parent_identifier' => 'management_schedule:admin/schedule',
+  );
   // Exported menu link: management_preview:admin/display
   $menu_links['management_preview:admin/display'] = array(
     'menu_name' => 'management',
@@ -54,7 +75,7 @@ function zebradog_schedule_menu_default_menu_links() {
   $menu_links['management_schedule:admin/schedule'] = array(
     'menu_name' => 'management',
     'link_path' => 'admin/schedule',
-    'router_path' => 'admin/schedule',
+    'router_path' => 'admin',
     'link_title' => 'Schedule',
     'options' => array(
       'attributes' => array(
@@ -65,16 +86,39 @@ function zebradog_schedule_menu_default_menu_links() {
     'module' => 'system',
     'hidden' => 0,
     'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
+    'has_children' => 1,
+    'expanded' => 1,
     'weight' => -47,
     'customized' => 1,
+  );
+  // Exported menu link: management_tradeshow-schedule:admin/schedule/70
+  $menu_links['management_tradeshow-schedule:admin/schedule/70'] = array(
+    'menu_name' => 'management',
+    'link_path' => 'admin/schedule/70',
+    'router_path' => 'admin/schedule/%',
+    'link_title' => 'Tradeshow Schedule',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'management_tradeshow-schedule:admin/schedule/70',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+    'parent_identifier' => 'management_schedule:admin/schedule',
   );
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
+  t('Lobby Schedule');
   t('Preview');
   t('Schedule');
+  t('Tradeshow Schedule');
 
 
   return $menu_links;

@@ -64,7 +64,7 @@ function enable_blocks() {
     'login' => array(
       'module' => 'user',
       'delta' => 'login',
-      'region' => 'navigation',
+      'region' => 'content',
       'weight' => '-6',
       'theme' => 'zd_ui',
       'css_class' => 'user-menu',

@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
 
   });
 
-  var cView, cYear, cMonth, cDate,init;
+  var cView, cYear, cMonth, cDate, cDisplay, init;
   cView = DEFAULT_VIEW;
 
   //Get previous has if it exists - used to redirect back from the modal state to previous calendar view
@@ -52,26 +52,29 @@ jQuery(document).ready(function() {
   }
   setView();
   function setView(){
+    var display_id = window.location.pathname.slice(window.location.pathname.lastIndexOf('/')+1);
     if(window.location.hash){
       var x = window.location.hash.slice(1).split('/');
       cView = x[0] ? x[0] : DEFAULT_VIEW;
       cYear = x[1];
       cMonth = x[2];
       cDate = x[3];
+      cDisplay = display_id;
     }
   }
   $('#calendar').fullCalendar({
     header: {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay'
+      right: 'month'
     },
     year: cYear,
     month: cMonth,
     date: cDate,
+    display: cDisplay,
     defaultView: cView,
     viewRender: function(view,element){
-      getEvent(view.visStart, view.visEnd);
+      getEvent(view.visStart, view.visEnd, cDisplay);
       var name = view.name == DEFAULT_VIEW ? '' : view.name;
       var d = $('#calendar').fullCalendar('getDate');
       window.location.hash = name
@@ -92,6 +95,9 @@ jQuery(document).ready(function() {
     },
     editable: true,
     droppable: true,
+    dayClick: function(date, allDay, jsEvent, view) {
+      return false;
+    },
     drop: function(date, allDay) {
 
       // retrieve the dropped element's stored Event Object
@@ -111,7 +117,7 @@ jQuery(document).ready(function() {
       var nid = $(this).data('nid');
 
       //create a new event in the CMS
-      createEvent(nid,date,allDay);
+      createEvent(nid,date,allDay,cDisplay);
 
     },
     eventClick: function(event, jsEvent, view){
@@ -123,9 +129,6 @@ jQuery(document).ready(function() {
     },
     eventResize: function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view){
       updateEvent(event);
-    },
-    dayClick: function(date, allDay, jsEvent, view) {
-        window.location.hash = 'agendaDay'+'/'+date.getFullYear()+'/'+date.getMonth()+'/'+date.getDate();
     },
     eventRender: function(event, element) {
       // Note that any additional pieces of DOM can be inserted here, like these elements below.
@@ -176,13 +179,13 @@ jQuery(document).ready(function() {
     });
   }
 
-  function getEvent(startDate, endDate){
+  function getEvent(startDate, endDate, displayId){
     var events = new Array();
     var start = startDate.getFullYear()+pad((startDate.getMonth()+1),2)+pad(startDate.getDate(),2);
     var end = endDate.getFullYear()+pad((endDate.getMonth()+1),2)+pad(endDate.getDate(),2);
     $.ajax({
         type:"GET",
-        url:BASEPATH + "events/"+start+"--"+end,
+        url:BASEPATH + "events/"+displayId+"/"+start+"--"+end,
         dataType:"json",
         success: function(data){
             $('#calendar').fullCalendar('removeEvents');
@@ -227,7 +230,7 @@ jQuery(document).ready(function() {
     });
   }
 
-  function createEvent(tid,date,allDay){
+  function createEvent(tid,date,allDay,displayId){
     var sDate = convertDateToCmsDate(date);
     var sTime = convertDateToCmsTime(date);
     if ( allDay ){
@@ -240,15 +243,16 @@ jQuery(document).ready(function() {
 
    var eDate = convertDateToCmsDate(date);
    var eTime = convertDateToCmsTime(date);
-   createScheduledContent(tid,sDate,sTime,eDate,eTime);
+   createScheduledContent(tid,sDate,sTime,eDate,eTime,displayId);
 
   }
 
-  function createScheduledContent(sTid,sDate,sTime,eDate,eTime){
+  function createScheduledContent(sTid,sDate,sTime,eDate,eTime,displayId){
     var data = "type=scheduled_content&date[value][date]="+sDate+
                "&date[value][time]="+sTime+
                "&date[value2][date]="+eDate+
                "&date[value2][time]="+eTime+
+               "&field_display="+displayId+
                "&field_scenario="+sTid+"&embed=true";
     var scheduleSrc = BASEPATH+"node/add/scheduled-content?"+data;
     showModal(scheduleSrc);
