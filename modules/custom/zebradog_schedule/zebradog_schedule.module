@@ -231,5 +231,6 @@ function zebradog_schedule_taxonomy_term_insert($term) {
       ))
       ->condition('mlid',$item_id)
       ->execute();
+    watchdog('term_to_menu',':menu_name (:tid) :item_id inserted as a child of :parent',array(':menu_name' => $term->name, ':tid' => $term->tid, ':item_id' => $item_id, ':parent' => 313));
   }
 }
