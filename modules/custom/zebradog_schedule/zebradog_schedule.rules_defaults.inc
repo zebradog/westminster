@@ -22,7 +22,9 @@ function zebradog_schedule_default_rules_configuration() {
           }
         }
       ],
-      "DO" : [ { "redirect" : { "url" : "admin\\/schedule" } } ]
+      "DO" : [
+        { "redirect" : { "url" : "admin\\/schedule\\/[node:field-display-term:0:tid]" } }
+      ]
     }
   }');
   return $items;

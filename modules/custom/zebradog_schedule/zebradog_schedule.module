@@ -190,7 +190,7 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
         }
         if (isset($params['field_scenario']))
         {
-          $form['field_scenario']['und'][0]['field_default_scenario']['und']['#default_value'] = $params['field_scenario'];
+          $form['field_default_scenario']['und']['#default_value'] = $params['field_scenario'];
         }
         if (isset($params['field_display']))
         {
