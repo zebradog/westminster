@@ -94,7 +94,7 @@ function zebradog_schedule_menu_default_menu_links() {
   // Exported menu link: management_tradeshow-schedule:admin/schedule/2
   $menu_links['management_tradeshow-schedule:admin/schedule/2'] = array(
     'menu_name' => 'management',
-    'link_path' => 'admin/schedule/1',
+    'link_path' => 'admin/schedule/2',
     'router_path' => 'admin/schedule/%',
     'link_title' => 'Tradeshow Schedule',
     'options' => array(
