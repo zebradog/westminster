@@ -20,5 +20,14 @@ function zebradog_schedule_user_default_permissions() {
     'module' => 'zebradog_schedule',
   );
 
+  // Exported permission: 'see schedule'.
+  $permissions['see schedule'] = array(
+    'name' => 'see schedule',
+    'roles' => array(
+      'content editor' => 'content editor',
+    ),
+    'module' => 'zebradog_schedule',
+  );
+
   return $permissions;
 }

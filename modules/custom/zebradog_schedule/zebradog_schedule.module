@@ -18,9 +18,8 @@ function zebradog_schedule_menu() {
     'title' => 'Schedule',
     'description' => 'Schedule',
     'page callback' => 'zebradog_schedule_page_schedule',
-    'access arguments' => array('administer own schedule'),
+    'access arguments' => array('see schedule'),
     'page arguments' => array(2),
-
   );
   return $items;
 }
@@ -32,6 +31,11 @@ function zebradog_schedule_permission() {
     'administer own schedule' => array(
       'title' => t('Administer Own Schedule'),
       'description' => t('Administer own schedule.'),
+      'restrict access' => TRUE,
+    ),
+    'see schedule' => array(
+      'title' => t('See Schedule Menu'),
+      'description' => t('See Schedule Menu.'),
       'restrict access' => TRUE,
     ),
   );
