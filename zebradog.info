@@ -1,6 +1,7 @@
 name = Zebradog
 description = Zebradog install profile.
 core = 7.x
+exclusive = 1
 
 ; Core
 dependencies[] = block
