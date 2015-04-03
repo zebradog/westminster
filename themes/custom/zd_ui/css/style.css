@@ -24,9 +24,8 @@
   float: left;
   position: relative;
   left: -12px;
-  top: 9px;
+  top: 15px;
   padding-right: 10px;
-  border-right: 1px solid;
   font-size:18px;
 }
 div.region-navigation {
@@ -52,4 +51,16 @@ section#block-user-login.user-menu {
 }
 .dropdown-menu li.leaf, .dropdown-menu li.expanded {
   width:100%;
+}
+.nav>li>a {
+  position: relative;
+  display: block;
+  padding: 15px;
+}
+.logo {
+  position: relative;
+  top: 6px;
+}
+.breadcrumb {
+  display: none;
 }
