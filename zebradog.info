@@ -54,6 +54,7 @@ dependencies[] = entity
 dependencies[] = entity_token
 dependencies[] = jquery_update
 dependencies[] = libraries
+dependencies[] = menu_per_role
 dependencies[] = module_filter
 dependencies[] = oauth_common
 dependencies[] = pathauto
