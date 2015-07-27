@@ -21,8 +21,64 @@ function zebradog_schedule_menu() {
     'access arguments' => array('see schedule'),
     'page arguments' => array(2),
   );
+
+  $items['schedule/json'] = array(
+      'access callback'   => true, // available to all
+      'page callback'     => '_zebradog_schedule_json', // defined below
+      'type' => MENU_CALLBACK
+  );
+
   return $items;
 }
+
+function _zebradog_schedule_json(){
+  $response = array();
+  $response['schedule'] = array();
+  $response['schedule']['Value'] = array();
+  $argStartDate = check_plain($_REQUEST['start']);
+  $argEndDate = check_plain($_REQUEST['end']);
+  $argDate = NULL;
+  if($argStartDate && $argEndDate):
+    $argDate = date('Ymd',strtotime($argStartDate)).'--'.date('Ymd',strtotime($argEndDate));
+  elseif(!$argStartDate && $argEndDate):
+    $argDate = date('Ymd',strtotime($argEndDate));
+  elseif($argStartDate && !$argEndDate):
+    $argDate = date('Ymd',strtotime($argStartDate));
+  endif;
+  $displayId = check_plain($_REQUEST['id']);
+  $displayId = $displayId ? $displayId : NULL;
+  $response['schedule']['Value']['items'] = views_get_view_result('events', 'page', $displayId, $argDate);
+  $outputData = array();
+  $outputData['schedule'] = array();
+  $outputData['schedule']['Value'] = array();
+  $outputData['schedule']['Value']['items'] = array();
+  foreach($response['schedule']['Value']['items'] as $row):
+    $timeArray = $row->_field_data['nid']['entity']->field_date['und'][0];
+    $startTime = strtotime($row->field_data_field_date_field_date_value.' '.$timeArray['timezone']);
+    $endTime = strtotime($row->field_data_field_date_field_date_value2.' '.$timeArray['timezone']);
+    $startDate = date('D M d o H:i:s ',$startTime).'GMT'.date('O',$startTime);
+    $endDate = date('D M d o H:i:s ',$endTime).'GMT'.date('O',$endTime);
+    $tempData = array();
+    $tempData['content'] = url('node/'.$row->nid, array('absolute' => TRUE));
+    $tempData['duration'] = strtotime($endDate) - strtotime($startDate);
+    $tempData['start'] = $startDate;
+    $tempData['end'] = $endDate;
+    //$tempData['repetition'] = $timeArray['rrule'] ? $timeArray['rrule']:'-';
+    array_push($outputData['schedule']['Value']['items'],$tempData);
+  endforeach;
+  $callback = check_plain($_REQUEST['callback']);
+  drupal_add_http_header('Access-Control-Allow-Origin', "*");
+  drupal_add_http_header('Access-Control-Allow-Methods', 'GET');
+  if (isset($callback) && $callback != '') {
+    $json_response = drupal_json_encode($outputData);
+    drupal_add_http_header('Content-Type', 'application/json');
+    echo $callback . "(" . $json_response . ");";
+    drupal_exit();
+  }else {
+    drupal_json_output($outputData);
+  }
+}
+
 /**
  * Implements hook_permission().
  */
