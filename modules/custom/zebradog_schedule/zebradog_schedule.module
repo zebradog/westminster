@@ -28,55 +28,121 @@ function zebradog_schedule_menu() {
       'type' => MENU_CALLBACK
   );
 
+  $items['events/json'] = array(
+      'access callback'   => true, // available to all
+      'page callback'     => '_zebradog_events_json', // defined below
+      'type' => MENU_CALLBACK
+  );
+
   return $items;
 }
 
-function _zebradog_schedule_json(){
-  $response = array();
-  $response['schedule'] = array();
-  $response['schedule']['Value'] = array();
+function _zebradog_events_json(){
+  $events = _zebradog_schedule_getEvents();
+  $output = [];
+  foreach($events as $row){
+    $e = [];
+    $e['id'] = $row->nid;
+    $e['title'] = $row->node_title;
+
+    $repeat = $row->field_data_field_date_field_date_rrule ? true : false;
+
+    if($repeat){
+      $e['className'] = 'repeat';
+      $e['rrule'] = $row->field_data_field_date_field_date_rrule;
+    }
+
+    $timeArray = $row->_field_data['nid']['entity']->field_date['und'][0];
+
+    $e['start'] = date("c", strtotime($row->field_data_field_date_field_date_value.' '.$timeArray['timezone']));
+    $e['end'] = date("c", strtotime($row->field_data_field_date_field_date_value2.' '.$timeArray['timezone']));
+    $e['overlap'] = false;
+    $e['allDay'] = false;
+    $e['startEditable'] = !$repeat;
+    $e['durationEditable'] = !$repeat;
+    $e['repeat'] = $repeat;
+    $e['scenarioNid'] = $row->node_field_data_field_content_nid;
+    $e['display'] = $row->_field_data["nid"]["entity"]->field_display_term["und"][0]["tid"];
+
+    $output[] = $e;
+  }
+
+  _zebradog_schedule_outputJSON($output);
+
+}
+
+function _zebradog_schedule_getEvents(){
   $argStartDate = check_plain($_REQUEST['start']);
   $argEndDate = check_plain($_REQUEST['end']);
   $argDate = NULL;
-  if($argStartDate && $argEndDate):
+  if($argStartDate && $argEndDate){
     $argDate = date('Ymd',strtotime($argStartDate)).'--'.date('Ymd',strtotime($argEndDate));
-  elseif(!$argStartDate && $argEndDate):
+  }elseif(!$argStartDate && $argEndDate){
     $argDate = date('Ymd',strtotime($argEndDate));
-  elseif($argStartDate && !$argEndDate):
+  }elseif($argStartDate && !$argEndDate){
     $argDate = date('Ymd',strtotime($argStartDate));
-  endif;
+  }else{
+    //default to today +/- one day
+    $start = new DateTime();
+    $end = new DateTime();
+    $start = $start->sub(new DateInterval('P1D'));
+    $end = $end->add(new DateInterval('P1D'));
+    $argDate = date_format($start,'Ymd').'--'.date_format($end,'Ymd');
+  }
   $displayId = check_plain($_REQUEST['id']);
-  $displayId = $displayId ? $displayId : NULL;
-  $response['schedule']['Value']['items'] = views_get_view_result('events', 'page', $displayId, $argDate);
+  $displayId = $displayId ? $displayId : "all";
+  return views_get_view_result('events', 'page',$displayId,$argDate);
+}
+
+function _zebradog_schedule_outputJSON($data){
+  $callback = check_plain($_REQUEST['callback']);
+  drupal_add_http_header('Access-Control-Allow-Origin', "*");
+  drupal_add_http_header('Access-Control-Allow-Methods', 'GET');
+  if (isset($callback) && $callback != '') {
+    $json_response = drupal_json_encode($data);
+    drupal_add_http_header('Content-Type', 'application/json');
+    echo $callback . "(" . $json_response . ");";
+    drupal_exit();
+  }else {
+    drupal_json_output($data);
+  }
+}
+
+function _zebradog_schedule_json(){
+  $events = _zebradog_schedule_getEvents();
   $outputData = array();
   $outputData['schedule'] = array();
   $outputData['schedule']['Value'] = array();
   $outputData['schedule']['Value']['items'] = array();
-  foreach($response['schedule']['Value']['items'] as $row):
+  foreach($events as $row):
+    $url = $row->_field_data["node_field_data_field_content_nid"]["entity"]->field_url["und"][0]["value"];
+    if($url){
+      //append the NID to content URL's
+      $u = explode('#',$url);
+      $url = $u[0]; //set url to base, without hash
+      $url = (strpos($url,'?') !== FALSE) ? $url.'&nid='.$row->nid : $url.'?nid='.$row->nid;
+      //add the post-hash content back in
+      for($i = 1; $i < count($u); $i++){
+        $url = $url.'#'.$u[$i];
+      }
+    }else{
+      //default to the node permalink if no content URL provided
+      $url = url('node/'.$row->nid, array('absolute' => TRUE));
+    }
     $timeArray = $row->_field_data['nid']['entity']->field_date['und'][0];
     $startTime = strtotime($row->field_data_field_date_field_date_value.' '.$timeArray['timezone']);
     $endTime = strtotime($row->field_data_field_date_field_date_value2.' '.$timeArray['timezone']);
     $startDate = date('D M d o H:i:s ',$startTime).'GMT'.date('O',$startTime);
     $endDate = date('D M d o H:i:s ',$endTime).'GMT'.date('O',$endTime);
     $tempData = array();
-    $tempData['content'] = url('node/'.$row->nid, array('absolute' => TRUE));
+    $tempData['content'] = $url;
     $tempData['duration'] = strtotime($endDate) - strtotime($startDate);
     $tempData['start'] = $startDate;
     $tempData['end'] = $endDate;
     //$tempData['repetition'] = $timeArray['rrule'] ? $timeArray['rrule']:'-';
     array_push($outputData['schedule']['Value']['items'],$tempData);
   endforeach;
-  $callback = check_plain($_REQUEST['callback']);
-  drupal_add_http_header('Access-Control-Allow-Origin', "*");
-  drupal_add_http_header('Access-Control-Allow-Methods', 'GET');
-  if (isset($callback) && $callback != '') {
-    $json_response = drupal_json_encode($outputData);
-    drupal_add_http_header('Content-Type', 'application/json');
-    echo $callback . "(" . $json_response . ");";
-    drupal_exit();
-  }else {
-    drupal_json_output($outputData);
-  }
+  _zebradog_schedule_outputJSON($outputData);
 }
 
 /**
@@ -261,7 +327,7 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-/*function zebradog_schedule_taxonomy_term_insert($term) {
+function zebradog_schedule_taxonomy_term_insert($term) {
   $vobj = taxonomy_vocabulary_machine_name_load('displays');
   if ($term->vid == $vobj->vid) {
     // If term is a member of the displays vocabulary, create a menu entry under Schedules
@@ -292,4 +358,4 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
       ->condition('mlid',$item_id)
       ->execute();
   }
-}*/
+}
