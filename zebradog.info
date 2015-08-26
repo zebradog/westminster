@@ -75,5 +75,11 @@ dependencies[] = views_bulk_operations
 dependencies[] = views_json
 dependencies[] = views_ui
 
+dependencies[] = amazons3
+dependencies[] = awssdk
+dependencies[] = cors
+dependencies[] = image_url_formatter
+
+
 ; Customs
 dependencies[] = zebradog_schedule

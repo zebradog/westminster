@@ -39,6 +39,13 @@ projects[views_bulk_operations][subdir] = "contrib"
 projects[views_datasource][subdir] = "contrib"
 projects[views_php][subdir] = "contrib"
 
+projects[amazons3][subdir] = "contrib"
+projects[amazons3][version] = "7.x-1.1"
+projects[awssdk][subdir] = "contrib"
+projects[cors][subdir] = "contrib"
+projects[image_url_formatter][subdir] = "contrib"
+
+
 ; Themes
 projects[bootstrap][subdir] = "contrib"
 
@@ -58,4 +65,3 @@ libraries[fullcalendar][directory_name] = "fullcalendar"
 libraries[spyc][download][type] = "get"
 libraries[spyc][download][url] = "https://github.com/mustangostang/spyc/archive/master.zip"
 libraries[spyc][directory_name] = "spyc"
-
