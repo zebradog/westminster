@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.views_default.inc
+ * westminster_schedule.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function zebradog_schedule_views_default_views() {
+function westminster_schedule_views_default_views() {
   $export = array();
 
   $view = new view();

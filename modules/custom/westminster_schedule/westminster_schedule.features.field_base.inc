@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.features.field_base.inc
+ * westminster_schedule.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function zebradog_schedule_field_default_field_bases() {
+function westminster_schedule_field_default_field_bases() {
   $field_bases = array();
 
   // Exported field_base: 'field_categories'

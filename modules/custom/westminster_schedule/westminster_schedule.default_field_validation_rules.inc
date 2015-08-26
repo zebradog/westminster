@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.default_field_validation_rules.inc
+ * westminster_schedule.default_field_validation_rules.inc
  */
 
 /**
  * Implements hook_default_field_validation_rule().
  */
-function zebradog_schedule_default_field_validation_rule() {
+function westminster_schedule_default_field_validation_rule() {
   $export = array();
 
   $rule = new stdClass();

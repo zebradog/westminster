@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.features.field_instance.inc
+ * westminster_schedule.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function zebradog_schedule_field_default_field_instances() {
+function westminster_schedule_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'node-interactive_scenario-field_categories'

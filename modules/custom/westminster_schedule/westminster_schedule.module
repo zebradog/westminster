@@ -1,44 +1,44 @@
 <?php
 /**
  * @file
- * Code for the zebradog_schedule feature.
+ * Code for the westminster_schedule feature.
  */
 
-include_once 'zebradog_schedule.features.inc';
+include_once 'westminster_schedule.features.inc';
 
 /**
  * @file
- * Zebradog Schedule functions.
+ * westminster Schedule functions.
  */
 
-function zebradog_schedule_menu() {
+function westminster_schedule_menu() {
   $items = array();
 
   $items['admin/schedule/%'] = array(
     'title' => 'Schedule',
     'description' => 'Schedule',
-    'page callback' => 'zebradog_schedule_page_schedule',
+    'page callback' => 'westminster_schedule_page_schedule',
     'access arguments' => array('see schedule'),
     'page arguments' => array(2),
   );
 
   $items['schedule/json'] = array(
       'access callback'   => true, // available to all
-      'page callback'     => '_zebradog_schedule_json', // defined below
+      'page callback'     => '_westminster_schedule_json', // defined below
       'type' => MENU_CALLBACK
   );
 
   $items['events/json'] = array(
       'access callback'   => true, // available to all
-      'page callback'     => '_zebradog_events_json', // defined below
+      'page callback'     => '_westminster_events_json', // defined below
       'type' => MENU_CALLBACK
   );
 
   return $items;
 }
 
-function _zebradog_events_json(){
-  $events = _zebradog_schedule_getEvents();
+function _westminster_events_json(){
+  $events = _westminster_schedule_getEvents();
   $output = [];
   foreach($events as $row){
     $e = [];
@@ -67,11 +67,11 @@ function _zebradog_events_json(){
     $output[] = $e;
   }
 
-  _zebradog_schedule_outputJSON($output);
+  _westminster_schedule_outputJSON($output);
 
 }
 
-function _zebradog_schedule_getEvents(){
+function _westminster_schedule_getEvents(){
   $argStartDate = check_plain($_REQUEST['start']);
   $argEndDate = check_plain($_REQUEST['end']);
   $argDate = NULL;
@@ -94,7 +94,7 @@ function _zebradog_schedule_getEvents(){
   return views_get_view_result('events', 'page',$displayId,$argDate);
 }
 
-function _zebradog_schedule_outputJSON($data){
+function _westminster_schedule_outputJSON($data){
   $callback = check_plain($_REQUEST['callback']);
   drupal_add_http_header('Access-Control-Allow-Origin', "*");
   drupal_add_http_header('Access-Control-Allow-Methods', 'GET');
@@ -108,8 +108,8 @@ function _zebradog_schedule_outputJSON($data){
   }
 }
 
-function _zebradog_schedule_json(){
-  $events = _zebradog_schedule_getEvents();
+function _westminster_schedule_json(){
+  $events = _westminster_schedule_getEvents();
   $outputData = array();
   $outputData['schedule'] = array();
   $outputData['schedule']['Value'] = array();
@@ -142,13 +142,13 @@ function _zebradog_schedule_json(){
     //$tempData['repetition'] = $timeArray['rrule'] ? $timeArray['rrule']:'-';
     array_push($outputData['schedule']['Value']['items'],$tempData);
   endforeach;
-  _zebradog_schedule_outputJSON($outputData);
+  _westminster_schedule_outputJSON($outputData);
 }
 
 /**
  * Implements hook_permission().
  */
-function zebradog_schedule_permission() {
+function westminster_schedule_permission() {
   return array(
     'administer own schedule' => array(
       'title' => t('Administer Own Schedule'),
@@ -166,7 +166,7 @@ function zebradog_schedule_permission() {
 /**
  * Implements hook_action_info().
  */
-function zebradog_schedule_page_schedule($display_id=NULL) {
+function westminster_schedule_page_schedule($display_id=NULL) {
   // Create some data
   $data = array
   (
@@ -178,78 +178,78 @@ function zebradog_schedule_page_schedule($display_id=NULL) {
   // from your callback. Attach the CSS using the #attached
   // element of this array
   $page = array(
-    'zebradog_schedule_page_schedule' => array(
+    'westminster_schedule_page_schedule' => array(
       // Note - we will register theme_my_page in the next step
-      '#theme' => 'zebradog_ui',
+      '#theme' => 'westminster_ui',
       '#contents' => $data,
     ),
     '#attached' => array(
       'css' => array(
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.resizable.min.css',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/themes/base/minified/jquery.ui.resizable.min.css',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/themes/zebradog_ui/css/style.css',
+          'data' => 'profiles/westminster/themes/westminster_ui/css/style.css',
         ),
         array(
           'type' => 'file',
-          'data' => drupal_get_path('module', 'zebradog_schedule') . '/css/fullcalendar.css',
+          'data' => drupal_get_path('module', 'westminster_schedule') . '/css/fullcalendar.css',
         ),
         array(
           'type' => 'file',
-          'data' => drupal_get_path('module', 'zebradog_schedule') . '/css/schedule.css',
+          'data' => drupal_get_path('module', 'westminster_schedule') . '/css/schedule.css',
         ),
       ),
       'js' => array(
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.mouse.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.mouse.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.draggable.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.draggable.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.droppable.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.droppable.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.resizable.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.resizable.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect-highlight.min.js',
+          'data' => 'profiles/westminster/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.effect-highlight.min.js',
         ),
         array(
           'type' => 'file',
-          'data' => 'profiles/zebradog/libraries/fullcalendar/fullcalendar/fullcalendar.js',
+          'data' => 'profiles/westminster/libraries/fullcalendar/fullcalendar/fullcalendar.js',
         ),
         array(
           'type' => 'file',
-          'data' => drupal_get_path('module', 'zebradog_schedule') . '/js/schedule.js',
+          'data' => drupal_get_path('module', 'westminster_schedule') . '/js/schedule.js',
         ),
       )
     ),
@@ -264,9 +264,9 @@ function zebradog_schedule_page_schedule($display_id=NULL) {
 /**
  * Implements hook_action_info().
  */
-function zebradog_schedule_theme() {
+function westminster_schedule_theme() {
   return array(
-    'zebradog_ui' => array(
+    'westminster_ui' => array(
       'render element' => 'elements',
       'template' => 'templates/calendar-page',
     ),
@@ -276,7 +276,7 @@ function zebradog_schedule_theme() {
 /**
  * Implements hook_translated_menu_link_alter().
  */
-function zebradog_schedule_translated_menu_link_alter(&$item, $map) {
+function westminster_schedule_translated_menu_link_alter(&$item, $map) {
   global $user;
   if (in_array('content editor', $user->roles)) {
     if ($item['menu_name'] == 'management') {
@@ -290,7 +290,7 @@ function zebradog_schedule_translated_menu_link_alter(&$item, $map) {
 /**
  * Implements hook_form_alter().
  */
-function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
+function westminster_schedule_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'scheduled_content_node_form' :
       // Prepopulate form based on activity in the Schedule page
@@ -327,7 +327,7 @@ function zebradog_schedule_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-function zebradog_schedule_taxonomy_term_insert($term) {
+function westminster_schedule_taxonomy_term_insert($term) {
   $vobj = taxonomy_vocabulary_machine_name_load('displays');
   if ($term->vid == $vobj->vid) {
     // If term is a member of the displays vocabulary, create a menu entry under Schedules

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.features.menu_custom.inc
+ * westminster_schedule.features.menu_custom.inc
  */
 
 /**
  * Implements hook_menu_default_menu_custom().
  */
-function zebradog_schedule_menu_default_menu_custom() {
+function westminster_schedule_menu_default_menu_custom() {
   $menus = array();
 
   // Exported menu: management.

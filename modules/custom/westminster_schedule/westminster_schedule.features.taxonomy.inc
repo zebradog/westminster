@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.features.taxonomy.inc
+ * westminster_schedule.features.taxonomy.inc
  */
 
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function zebradog_schedule_taxonomy_default_vocabularies() {
+function westminster_schedule_taxonomy_default_vocabularies() {
   return array(
     'categories' => array(
       'name' => 'Categories',

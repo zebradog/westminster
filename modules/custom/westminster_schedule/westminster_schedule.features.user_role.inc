@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.features.user_role.inc
+ * westminster_schedule.features.user_role.inc
  */
 
 /**
  * Implements hook_user_default_roles().
  */
-function zebradog_schedule_user_default_roles() {
+function westminster_schedule_user_default_roles() {
   $roles = array();
 
   // Exported role: content editor.

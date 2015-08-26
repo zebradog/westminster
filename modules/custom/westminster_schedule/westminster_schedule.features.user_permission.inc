@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.features.user_permission.inc
+ * westminster_schedule.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function zebradog_schedule_user_default_permissions() {
+function westminster_schedule_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: 'administer own schedule'.
@@ -17,7 +17,7 @@ function zebradog_schedule_user_default_permissions() {
       'authenticated user' => 'authenticated user',
       'content editor' => 'content editor',
     ),
-    'module' => 'zebradog_schedule',
+    'module' => 'westminster_schedule',
   );
 
   // Exported permission: 'see schedule'.
@@ -26,7 +26,7 @@ function zebradog_schedule_user_default_permissions() {
     'roles' => array(
       'content editor' => 'content editor',
     ),
-    'module' => 'zebradog_schedule',
+    'module' => 'westminster_schedule',
   );
 
   return $permissions;

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.rules_defaults.inc
+ * westminster_schedule.rules_defaults.inc
  */
 
 /**
  * Implements hook_default_rules_configuration().
  */
-function zebradog_schedule_default_rules_configuration() {
+function westminster_schedule_default_rules_configuration() {
   $items = array();
   $items['rules_content_created_redirect'] = entity_import('rules_config', '{ "rules_content_created_redirect" : {
       "LABEL" : "Content Created Redirect",

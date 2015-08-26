@@ -1,5 +1,5 @@
-name = Zebradog
-description = Zebradog install profile.
+name = westminster
+description = westminster install profile.
 core = 7.x
 exclusive = 1
 
@@ -82,4 +82,4 @@ dependencies[] = image_url_formatter
 
 
 ; Customs
-dependencies[] = zebradog_schedule
+dependencies[] = westminster_schedule

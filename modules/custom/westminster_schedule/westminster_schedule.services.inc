@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.services.inc
+ * westminster_schedule.services.inc
  */
 
 /**
  * Implements hook_default_services_endpoint().
  */
-function zebradog_schedule_default_services_endpoint() {
+function westminster_schedule_default_services_endpoint() {
   $export = array();
 
   $endpoint = new stdClass();

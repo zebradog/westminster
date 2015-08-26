@@ -1,9 +1,9 @@
 <?php
 /**
  * @file
- * Enables modules and site configuration for a zebradog site installation.
+ * Enables modules and site configuration for a westminster site installation.
  */
-function zebradog_install_tasks() {
+function westminster_install_tasks() {
   $tasks = array();
   $tasks['enable_themes'] = array(
     'display_name' => t('Enabling themes'),
@@ -36,10 +36,10 @@ function zebradog_install_tasks() {
   return $tasks;
 }
 function enable_bootstrap() {
-  theme_enable(array('bootstrap','zd_ui'));
-  variable_set('theme_default','zd_ui');
-  variable_set('admin_theme','zd_ui');
-  variable_set('node_admin_theme','zd_ui');
+  theme_enable(array('bootstrap','westminster_ui'));
+  variable_set('theme_default','westminster_ui');
+  variable_set('admin_theme','westminster_ui');
+  variable_set('node_admin_theme','westminster_ui');
 }
 function enable_blocks() {
   $blocks = array(
@@ -48,7 +48,7 @@ function enable_blocks() {
       'delta' => 'management',
       'region' => 'navigation',
       'weight' => '-9',
-      'theme' => 'zd_ui',
+      'theme' => 'westminster_ui',
       'css_class' => 'management-menu',
       'title' => '<none>',
     ),
@@ -57,7 +57,7 @@ function enable_blocks() {
       'delta' => 'user-menu',
       'region' => 'navigation',
       'weight' => '0',
-      'theme' => 'zd_ui',
+      'theme' => 'westminster_ui',
       'css_class' => 'user-menu',
       'title' => '<none>',
     ),
@@ -66,7 +66,7 @@ function enable_blocks() {
       'delta' => 'login',
       'region' => 'content',
       'weight' => '-6',
-      'theme' => 'zd_ui',
+      'theme' => 'westminster_ui',
       'css_class' => 'user-menu',
       'title' => '<none>',
     ),
@@ -96,14 +96,14 @@ function enable_taxonomy_terms(){
     -32 => 'Lobby',
     -31 => 'Tradeshow',
   );
-  _zebradog_terms_load_terms($displays, 'displays');
+  _westminster_terms_load_terms($displays, 'displays');
 // Scenarios taxonomy terms
   $scenarios = array(
     -32 => 'Interactive Content',
     -31 => 'Slideshow Scenario',
     -30 => 'Video Scenario',
   );
-  _zebradog_terms_load_terms($scenarios, 'scenario_type');
+  _westminster_terms_load_terms($scenarios, 'scenario_type');
 
 // Category taxonomy terms
   $categories = array(
@@ -120,17 +120,17 @@ function enable_taxonomy_terms(){
     -22 => 'Operations Areas',
     -21 => 'Community Services',
   );
-  _zebradog_terms_load_terms($categories, 'categories');
+  _westminster_terms_load_terms($categories, 'categories');
   $upstream = array(
     -31 => 'Exploration',      // Upstream
     -30 => 'Drilling',         // Upstream
   );
-  _zebradog_terms_load_terms($upstream, 'categories','Upstream');
+  _westminster_terms_load_terms($upstream, 'categories','Upstream');
   $downstream = array(
     -31 => 'Refining',
     -30 => 'Distribution',
   );
-  _zebradog_terms_load_terms($downstream, 'categories','Downstream');
+  _westminster_terms_load_terms($downstream, 'categories','Downstream');
   $lifestyle = array(
     -31 => 'Education',
     -30 => 'Healthcare',
@@ -144,8 +144,8 @@ function enable_taxonomy_terms(){
     -31 => 'Vacation/School Trips',
     -30 => 'Repat Trips',
   );
-  _zebradog_terms_load_terms($lifestyle, 'categories','Lifestyle');
-  _zebradog_terms_load_terms($lifestyle_travel, 'categories','Travel');
+  _westminster_terms_load_terms($lifestyle, 'categories','Lifestyle');
+  _westminster_terms_load_terms($lifestyle_travel, 'categories','Travel');
 
   $saudi_arabia = array(
     -31 => 'Regions',
@@ -158,8 +158,8 @@ function enable_taxonomy_terms(){
   $saudi_arabia_regions = array(
     -31 => 'Central Area',
   );
-  _zebradog_terms_load_terms($saudi_arabia, 'categories','Saudi Arabia');
-  _zebradog_terms_load_terms($saudi_arabia_regions, 'categories','Regions');
+  _westminster_terms_load_terms($saudi_arabia, 'categories','Saudi Arabia');
+  _westminster_terms_load_terms($saudi_arabia_regions, 'categories','Regions');
   $operations_areas = array(
     -31 => 'Maps',
     -30 => 'International Operations',
@@ -171,14 +171,14 @@ function enable_taxonomy_terms(){
     -29 => 'Dhahran',
     -28 => 'Ras Tanura',
   );
-  _zebradog_terms_load_terms($operations_areas, 'categories', 'Operation Areas');
-  _zebradog_terms_load_terms($operations_areas_in_saudi_arabia, 'categories', 'Operations in Saudi Arabia');
+  _westminster_terms_load_terms($operations_areas, 'categories', 'Operation Areas');
+  _westminster_terms_load_terms($operations_areas_in_saudi_arabia, 'categories', 'Operations in Saudi Arabia');
 
   $community_services = array(
     -31 => 'ASC Community Services',
     -30 => 'SA Community Services',
   );
-  _zebradog_terms_load_terms($community_services, 'categories', 'Community Services');
+  _westminster_terms_load_terms($community_services, 'categories', 'Community Services');
 
 }
 
@@ -213,7 +213,7 @@ function add_sample_event() {
 /**
  * Custom function to load an array of terms into a specified vocabulary.
  */
-function _zebradog_terms_load_terms($terms, $vocab_name, $parent = NULL){
+function _westminster_terms_load_terms($terms, $vocab_name, $parent = NULL){
   $vocab = taxonomy_vocabulary_machine_name_load($vocab_name);
   $parent_tid = 0;
   if (!is_null($parent)) {
@@ -229,4 +229,3 @@ function _zebradog_terms_load_terms($terms, $vocab_name, $parent = NULL){
     taxonomy_term_save($data);
   }
 }
-

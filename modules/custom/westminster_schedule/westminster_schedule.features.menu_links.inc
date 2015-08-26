@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * zebradog_schedule.features.menu_links.inc
+ * westminster_schedule.features.menu_links.inc
  */
 
 /**
  * Implements hook_menu_default_menu_links().
  */
-function zebradog_schedule_menu_default_menu_links() {
+function westminster_schedule_menu_default_menu_links() {
   $menu_links = array();
 
   // Exported menu link: management_administration:admin
