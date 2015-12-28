@@ -10,6 +10,10 @@
   height:50px;
 }
 
+.login-box .logo-lg > img {
+  max-width: 100%;
+}
+
 @media (max-width: 767px){
 
   body.skin-black #logo,
@@ -37,4 +41,14 @@ body .label {
 a.tabledrag-handle .handle {
   width: 24px;
   height: 24px;
+}
+
+.box > .box-header > h4{
+  margin:0;
+}
+
+@media (max-width: 991px){
+  .content-header > h1.page-title{
+    margin-top:20px;
+  }
 }
